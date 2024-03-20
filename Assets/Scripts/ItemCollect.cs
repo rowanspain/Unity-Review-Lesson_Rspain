@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Profiling;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class ItemCollect : NetworkBehaviour
 {
-    private Dictionary<Item.VegetableType, int> ItemInventory - new Dictionary<Item.VegetableType, int>();
+    private Dictionary<Item.VegetableType, int> ItemInventory = new Dictionary<Item.VegetableType, int>();
 
 
     public delegate void CollectItem(Item.VegetableType item);
     public static event CollectItem ItemCollected;
+    private Rigidbody rbPlayer;
+    public GameObject[] spawnPoints = null;
 
     Collider itemCollider = null;
 
@@ -67,7 +70,7 @@ public class ItemCollect : NetworkBehaviour
             return;
         }
 
-        if(other.CompareTage("Item"))
+        if(other.CompareTag("Item"))
         {
             itemCollider = other;
         }
